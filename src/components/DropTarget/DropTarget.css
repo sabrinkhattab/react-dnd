@@ -14,3 +14,6 @@
     margin-left: 10px;
     font-weight: bold;
 }
+.column-body{
+    height: 100vh;
+}

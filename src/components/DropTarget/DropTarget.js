@@ -1,19 +1,35 @@
-import React from 'react'
+import React , {useEffect , useState} from 'react'
 import {Grid} from "@material-ui/core"
 import "./DropTarget.css"
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useDrop} from 'react-dnd'
 import {ItemsTypes} from '../../utils/items'
+import {dragCardAction} from '../../Redux/actions'
+import {useSelector, useDispatch } from "react-redux";
+import {Card} from '..'
+
 
 const DropTarget =(props)=>{
+
+    const dispatch = useDispatch();
+    
+    const cardsList = useSelector((state) => state.cardsInfo);
+
+    const [cardsInfo, setCardsInfo] = useState([]);
+
+    useEffect(() => {
+        setCardsInfo(cardsList);
+      }, [cardsList]);
+
     const [{isOver} , drop] = useDrop({
         accept : ItemsTypes.CARD,
-        drop : (item , monitor)=> console.log('hello',props.columnName),
+        drop : (item , monitor)=> dispatch(dragCardAction(item.id , props.columnName)),
         collect :monitor =>({
             isOver : !!monitor.isOver()
         })
 
     })
+
     return (
         <Grid item lg={3}>
         <div className="column-wrapper">
@@ -33,7 +49,9 @@ const DropTarget =(props)=>{
                 <Grid item>
                     <div className="column-body" ref={drop}>
                         <Grid container justify="center" >
-                        {props.children}
+                       {cardsInfo && cardsInfo.cardsInfo.filter(card => card.status === props.columnName).map(card=>{
+                        return <Card _id={card.id}/>
+                      })}
                         </Grid>
                     </div>
                 </Grid>

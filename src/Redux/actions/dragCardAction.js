@@ -1,8 +1,8 @@
 import {DRAG_CARD } from '../actionsTypes'
 
-  const dragCard =(id)=>({
+  const dragCard =(card_id , new_status)=>({
     type : DRAG_CARD ,
-    payload : id
+    payload : {id:card_id , status :new_status}
 })
 
 
