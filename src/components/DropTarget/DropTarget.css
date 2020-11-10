@@ -1,0 +1,16 @@
+.column-wrapper{
+    border-right: 1px solid #e3e6f0 ;
+    height: 100vh;
+    overflow: auto
+}
+.column-header{
+    border-bottom: 2px solid #e3e6f0 ;
+    padding: 10px;
+
+}
+.column-name{
+    color :'#019cdf';
+    vertical-align: super;
+    margin-left: 10px;
+    font-weight: bold;
+}
